@@ -51,7 +51,7 @@ test("username input should change", ()=> {
     render(<Login />)
     const usernameInputEl = screen.getByPlaceholderText(/username/i);
     // create a test value since we can't take actual value from user
-    // const testValue = "test"
+    const testValue = "test"
 
     fireEvent.change(usernameInputEl, {target: {value: testValue}});
     // expect (usernameInputEl).toHaveValue("testValue")
@@ -61,9 +61,21 @@ test("username input should change", ()=> {
 test("password input should change", ()=> {
     render(<Login />)
     const userPasswordInputEl = screen.getByPlaceholderText(/password/i);
-    // const testValue = "test"
+    const testValue = "test"
     fireEvent.change(userPasswordInputEl,{target: {value: testValue}})
     // expect (userPasswordInputEl).toHaveValue("testValue")
     expect (userPasswordInputEl).toHaveValue("")
 }); // give the imput the attribute value
 
+test("button should not be disabled", () => {
+    render(<Login />)
+    const buttonEl = screen.getByRole(/button/i)
+    // simulate a user again
+    const userInputEl = screen.getByPlaceholderText(/username/i);
+    const passwordInputEl = screen.getByPlaceholderText(/username/i);
+    const testValue = "test"
+
+    fireEvent.change(userInputEl, {target: {value: testValue}});
+    fireEvent.change(passwordInputEl, {target: {value: testValue}});
+    expect(buttonEl).not.toBeDisabled()
+})
