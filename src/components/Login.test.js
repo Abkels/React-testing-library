@@ -148,3 +148,9 @@ test("user should be rendered after fetching", async () => {
    })
 });
 
+// Snapshot test
+test("Login component snapshot", () => {
+    const component = renderer.create(<Login />);
+    const tree = component.toJSON();
+    expect(tree).toMatchSnapshot();
+})
